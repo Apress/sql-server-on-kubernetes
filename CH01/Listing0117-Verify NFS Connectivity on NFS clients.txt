@@ -1,0 +1,2 @@
+sudo mount -t nfs storage:/srv/exports /mnt 
+ls -al /mnt/volumes

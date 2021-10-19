@@ -1,0 +1,24 @@
+#!/bin/bash
+apt install -y nfs-kernel-server
+groupadd mssql -g 10001
+useradd -u 10001 mssql -g mssql
+addgroup --gid 472 grafana
+useradd -g 472 -u 472 grafana
+
+mkdir -p /srv/exports/volumes/
+chown -R mssql:mssql /srv/exports/volumes/
+echo '/srv/exports 172.16.94.0/24(rw,sync,no_subtree_check,no_root_squash)' > exports
+chmod 644 exports
+mv exports /etc/exports
+exportfs -a
+systemctl restart nfs-kernel-server
+
+mkdir /srv/exports/volumes/sql-instance-1
+chown -R mssql:mssql /srv/exports/volumes/
+
+mkdir /srv/exports/volumes/influxdb
+mkdir /srv/exports/volumes/grafana
+chown 472:472 /srv/exports/volumes/grafana
+
+mkdir /srv/exports/volumes/webcontent
+echo "Hello World!!!" >  /srv/exports/volumes/webcontent/index.html

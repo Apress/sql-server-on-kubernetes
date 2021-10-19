@@ -1,0 +1,1 @@
+(Invoke-WebRequest https://mcr.microsoft.com/v2/mssql/server/tags/list).Content

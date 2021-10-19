@@ -1,0 +1,3 @@
+docker cp TestDB1.bak sql1:/var/opt/mssql/data
+docker exec -u root sql1 chown mssql /var/opt/mssql/data/ TestDB1.bak
+sqlcmd -S localhost,1433 -U sa -i restore_testdb1.sql -P 'S0methingS@Str0ng!'

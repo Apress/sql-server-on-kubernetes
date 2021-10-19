@@ -1,0 +1,3 @@
+choco install kubernetes-cli -y
+choco install sqlserver-cmdlineutils -y
+choco install azure-cli -y

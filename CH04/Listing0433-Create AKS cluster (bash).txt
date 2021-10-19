@@ -1,0 +1,5 @@
+az aks create \
+    --resource-group "Kubernetes-Cloud" \
+    --generate-ssh-keys \
+    --name AKSCluster \
+    --node-count 3

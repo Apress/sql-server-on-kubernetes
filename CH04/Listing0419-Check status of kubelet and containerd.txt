@@ -1,0 +1,2 @@
+sudo systemctl status kubelet.service 
+sudo systemctl status containerd.service 

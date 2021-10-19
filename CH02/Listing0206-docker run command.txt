@@ -1,0 +1,7 @@
+docker run \
+    --env 'ACCEPT_EULA=Y' \
+    --env 'MSSQL_SA_PASSWORD=S0methingS@Str0ng!' \
+    --name 'sql1' \
+    --publish 1433:1433 \
+    --detach \
+    mcr.microsoft.com/mssql/server:2019-CU9-ubuntu-18.04

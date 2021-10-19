@@ -1,0 +1,3 @@
+wget -q -O deploy_kubeadm.sh https://bookmark.ws/ArcDemo_Linux
+chmod +x deploy_kubeadm.sh
+./deploy_kubeadm.sh

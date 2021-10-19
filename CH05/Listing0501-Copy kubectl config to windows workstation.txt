@@ -1,0 +1,5 @@
+mkdir c:\users\labuser\.kube
+
+$LinuxPW="Str@ngPassw0rd"
+
+pscp -P 22 -pw $LinuxPW labuser@control:/home/labuser/.kube/config c:\users\labuser\.kube 

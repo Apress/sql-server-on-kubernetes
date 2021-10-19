@@ -1,0 +1,2 @@
+sudo systemctl enable kubelet.service
+sudo systemctl enable containerd.service

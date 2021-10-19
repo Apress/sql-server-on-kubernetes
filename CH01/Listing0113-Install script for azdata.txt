@@ -1,0 +1,2 @@
+curl -o azdata.msi https://aka.ms/azdata-msi
+msiexec /i azdata.msi /passive

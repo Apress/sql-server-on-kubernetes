@@ -1,0 +1,2 @@
+sudo apt-get update
+apt-cache policy kubelet | head -n 20 

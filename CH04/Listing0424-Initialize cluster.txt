@@ -1,0 +1,3 @@
+sudo kubeadm init \
+    --config=ClusterConfiguration.yaml \
+    --cri-socket /run/containerd/containerd.sock

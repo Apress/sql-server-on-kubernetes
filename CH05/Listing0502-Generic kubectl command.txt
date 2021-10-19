@@ -1,0 +1,1 @@
+kubectl <operation> <resource type> <resource name> <output options>

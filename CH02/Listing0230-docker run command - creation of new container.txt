@@ -1,0 +1,7 @@
+docker run \
+    --name 'sql2' \
+    -e 'ACCEPT_EULA=Y' \
+    -e 'MSSQL_SA_PASSWORD=S0methingS@Str0ng!' \
+    -p 1433:1433 \
+    -v sqldata1:/var/opt/mssql \
+    -d mcr.microsoft.com/mssql/server:2019-CU9-ubuntu-18.04

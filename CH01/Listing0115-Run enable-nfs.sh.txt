@@ -1,0 +1,2 @@
+chmod +x enable-nfs.sh
+sudo ./enable-nfs.sh

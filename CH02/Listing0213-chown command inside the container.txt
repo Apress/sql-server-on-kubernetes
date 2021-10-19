@@ -1,0 +1,1 @@
+docker exec -u root sql2 chown mssql /var/opt/mssql/data/TestDB1.bak

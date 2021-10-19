@@ -1,0 +1,4 @@
+sudo apt-get install -y azdata-cli
+sudo apt-get install -y azure-cli
+sudo apt-get install -y kubectl
+sudo apt-get install -y mssql-tools

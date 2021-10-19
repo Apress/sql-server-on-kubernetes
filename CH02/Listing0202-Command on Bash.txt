@@ -1,0 +1,1 @@
+curl -sL https://mcr.microsoft.com/v2/mssql/server/tags/list 

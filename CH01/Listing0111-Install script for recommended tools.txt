@@ -1,0 +1,4 @@
+choco install curl -y
+choco install grep -y
+choco install putty -y
+choco install googlechrome -y
