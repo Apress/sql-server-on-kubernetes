@@ -1,0 +1,4 @@
+spec:
+  containers:
+  - command:
+    - kube-apiserver

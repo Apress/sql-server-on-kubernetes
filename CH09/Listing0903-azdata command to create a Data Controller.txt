@@ -1,0 +1,9 @@
+azdata arc dc create \
+--connectivity-mode Indirect \
+--name arc-dc-aks \
+--namespace arc \
+--subscription <Subscription ID> \
+--resource-group "Kubernetes-Cloud" \
+--location eastus \
+--storage-class managed-premium \
+--profile-name azure-arc-aks-premium-storage

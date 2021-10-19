@@ -1,0 +1,1 @@
+azdata bdc config init --path myBDC –-source aks-dev-test

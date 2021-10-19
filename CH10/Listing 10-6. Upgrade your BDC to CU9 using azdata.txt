@@ -1,0 +1,1 @@
+azdata bdc upgrade --name mybdc --tag 2019-CU9-ubuntu-16.04

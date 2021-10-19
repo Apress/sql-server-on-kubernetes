@@ -1,0 +1,155 @@
+{
+    "apiVersion": "v1",
+    "metadata": {
+        "kind": "BigDataCluster",
+        "name": "mssql-cluster"
+    },
+    "spec": {
+        "resources": {
+            "nmnode-0": {
+                "spec": {
+                    "replicas": 2
+                }
+            },
+            "sparkhead": {
+                "spec": {
+                    "replicas": 2
+                }
+            },
+            "zookeeper": {
+                "spec": {
+                    "replicas": 3
+                }
+            },
+            "gateway": {
+                "spec": {
+                    "replicas": 1,
+                    "endpoints": [
+                        {
+                            "name": "Knox",
+                            "dnsName": "",
+                            "serviceType": "NodePort",
+                            "port": 30443
+                        }
+                    ]
+                }
+            },
+            "appproxy": {
+                "spec": {
+                    "replicas": 1,
+                    "endpoints": [
+                        {
+                            "name": "AppServiceProxy",
+                            "dnsName": "",
+                            "serviceType": "NodePort",
+                            "port": 30778
+                        }
+                    ]
+                }
+            },
+            "master": {
+                "metadata": {
+                    "kind": "Pool",
+                    "name": "default"
+                },
+                "spec": {
+                    "type": "Master",
+                    "replicas": 3,
+                    "endpoints": [
+                        {
+                            "name": "Master",
+                            "dnsName": "",
+                            "serviceType": "NodePort",
+                            "port": 31433
+                        },
+                        {
+                            "name": "MasterSecondary",
+                            "dnsName": "",
+                            "serviceType": "NodePort",
+                            "port": 31436
+                        }
+                    ],
+                    "settings": {
+                        "sql": {
+                            "hadr.enabled": "true"
+                        }
+                    }
+                }
+            },
+            "compute-0": {
+                "metadata": {
+                    "kind": "Pool",
+                    "name": "default"
+                },
+                "spec": {
+                    "type": "Compute",
+                    "replicas": 1
+                }
+            },
+            "data-0": {
+                "metadata": {
+                    "kind": "Pool",
+                    "name": "default"
+                },
+                "spec": {
+                    "type": "Data",
+                    "replicas": 2
+                }
+            },
+            "storage-0": {
+                "metadata": {
+                    "kind": "Pool",
+                    "name": "default"
+                },
+                "spec": {
+                    "type": "Storage",
+                    "replicas": 3,
+                    "settings": {
+                        "spark": {
+                            "includeSpark": "true"
+                        }
+                    }
+                }
+            }
+        },
+        "services": {
+            "sql": {
+                "resources": [
+                    "master",
+                    "compute-0",
+                    "data-0",
+                    "storage-0"
+                ]
+            },
+            "hdfs": {
+                "resources": [
+                    "nmnode-0",
+                    "zookeeper",
+                    "storage-0",
+                    "sparkhead"
+                ],
+                "settings": {
+                    "hdfs-site.dfs.replication": "3"
+                }
+            },
+            "spark": {
+                "resources": [
+                    "sparkhead",
+                    "storage-0"
+                ],
+                "settings": {
+                    "spark-defaults-conf.spark.driver.memory": "2g",
+                    "spark-defaults-conf.spark.driver.cores": "1",
+                    "spark-defaults-conf.spark.executor.instances": "3",
+                    "spark-defaults-conf.spark.executor.memory": "1536m",
+                    "spark-defaults-conf.spark.executor.cores": "1",
+                    "yarn-site.yarn.nodemanager.resource.memory-mb": "18432",
+                    "yarn-site.yarn.nodemanager.resource.cpu-vcores": "6",
+                    "yarn-site.yarn.scheduler.maximum-allocation-mb": "18432",
+                    "yarn-site.yarn.scheduler.maximum-allocation-vcores": "6",
+                    "yarn-site.yarn.scheduler.capacity.maximum-am-resource-percent": "0.3"
+                }
+            }
+        }
+    }
+}

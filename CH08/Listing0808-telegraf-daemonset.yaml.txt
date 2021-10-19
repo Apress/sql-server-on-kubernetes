@@ -1,0 +1,79 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: telegraf
+  namespace: monitoring
+  labels:
+    k8s-app: telegraf
+spec:
+  selector:
+    matchLabels:
+      name: telegraf
+  template:
+    metadata:
+      labels:
+        name: telegraf
+    spec:
+      containers:
+      - name: telegraf
+        image: docker.io/telegraf:latest
+        env:
+        - name: HOSTNAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        - name: "HOST_PROC"
+          value: "/rootfs/proc"
+        - name: "HOST_SYS"
+          value: "/rootfs/sys"
+        - name: INFLUXDB_USER
+          valueFrom:
+            secretKeyRef:
+              name: influxdb-creds
+              key: INFLUXDB_USER
+        - name: INFLUXDB_USER_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: influxdb-creds
+              key: INFLUXDB_USER_PASSWORD
+        - name: INFLUXDB_HOST
+          valueFrom:
+            secretKeyRef:
+              name: influxdb-creds
+              key: INFLUXDB_HOST
+        - name: INFLUXDB_DB
+          valueFrom:
+            secretKeyRef:
+              name: influxdb-creds
+              key: INFLUXDB_DB
+        volumeMounts:
+        - name: sys
+          mountPath: /rootfs/sys
+          readOnly: true
+        - name: proc
+          mountPath: /rootfs/proc
+          readOnly: true
+        - name: docker-socket
+          mountPath: /var/run/docker.sock
+        - name: utmp
+          mountPath: /var/run/utmp
+          readOnly: true
+        - name: config
+          mountPath: /etc/telegraf
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: sys
+        hostPath:
+          path: /sys
+      - name: docker-socket
+        hostPath:
+          path: /var/run/docker.sock
+      - name: proc
+        hostPath:
+          path: /proc
+      - name: utmp
+        hostPath:
+          path: /var/run/utmp
+      - name: config
+        configMap:
+          name: telegraf

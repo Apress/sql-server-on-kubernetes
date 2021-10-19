@@ -1,0 +1,1 @@
+azdata login -ns arc 

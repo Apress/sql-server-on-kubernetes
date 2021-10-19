@@ -1,0 +1,5 @@
+spec:
+      securityContext:
+        fsGroup: 10001
+      hostname:
+        sql01

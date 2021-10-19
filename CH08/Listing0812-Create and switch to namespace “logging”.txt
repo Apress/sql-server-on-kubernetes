@@ -1,0 +1,2 @@
+kubectl create namespace logging
+kubectl config set-context --current --namespace=logging

@@ -1,0 +1,1 @@
+kubectl delete pod mssql-deployment-748c745b8d-w2sf8

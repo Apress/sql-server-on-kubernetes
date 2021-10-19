@@ -1,0 +1,2 @@
+kubectl create namespace monitoring
+kubectl config set-context --current --namespace=monitoring

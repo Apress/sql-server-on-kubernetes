@@ -1,0 +1,6 @@
+azdata arc sql mi create \
+--name arc-mi-01 \
+--storage-class-data managed-premium \
+--storage-class-logs managed-premium \
+--storage-class-data-logs managed-premium \
+--storage-class-backups managed-premium 

@@ -1,0 +1,1 @@
+sqlcmd -S control,<PORT> -U sa -P <PASSWORD> -Q "CREATE DATABASE TestDB1"

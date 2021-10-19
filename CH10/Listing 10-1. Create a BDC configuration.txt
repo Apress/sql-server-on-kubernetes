@@ -1,0 +1,1 @@
+azdata bdc config init [--path] [--source -s]

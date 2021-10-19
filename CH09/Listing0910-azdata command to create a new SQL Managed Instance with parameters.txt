@@ -1,0 +1,3 @@
+azdata arc sql mi create \
+--name arc-mi-ha \
+--replicas 3

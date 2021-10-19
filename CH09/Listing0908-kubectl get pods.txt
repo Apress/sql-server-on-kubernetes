@@ -1,0 +1,1 @@
+kubectl get pods arc-mi-01-0 -n arc
